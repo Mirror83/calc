@@ -16,7 +16,7 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 
 ## Overview
 
-The challenge was to implement a functioning calculator whose UI was to be built according to the specified design.
+The challenge was to implement a functional calculator whose UI was to be built according to the specified design.
 
 ### The challenge
 
