@@ -60,9 +60,9 @@ This solution made it much easier for the user to enter slightly more complex ca
 I learnt the importance of data structures and algorithms as this was a very real use case for them.
 I am proud of the functions in the infix-to-postfix.js file. Although they are not really complex and all, I am glad that I was able to come up with these functions (although I obtained the theory behind them from a data structures and algorithms class) and to actually implement them fairly well in a real app.
 
-I also learned how to write JS regular expressions as using the match function was a requirement in my implementation.
+I also learned how to write JS regular expressions as using the `String.match` function was a requirement in my implementation.
 
 ### Useful resources
 
-- [MDN JavaScript Guide - Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) - This made me able to use the String.match() function.
+- [MDN JavaScript Guide - Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) - This made me able to use the `String.match` function.
 - [The Joy of CSS Grid](https://www.youtube.com/watch?v=705XCEruZFs) - An amazing video (from the YouTube Channel Fireship) from which I learned CSS grid through the three layouts that are built form scratch in it (the video). I recommend it to anyone who wants to get started with CSS grid.
