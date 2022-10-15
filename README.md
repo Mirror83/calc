@@ -31,7 +31,7 @@ Users should be able to:
 
 **Partially completed**
 
-Theme switching is not implemented, but the calculator is functional
+Theme switching is not implemented, but the calculator is functional.
 The styles need to be a bit more refined
 
 ### Screenshot

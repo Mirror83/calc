@@ -3,11 +3,26 @@
 }
 
 body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+}
+
+.view-area {
+  height: 100vh;
   background-color: hsl(222, 26%, 31%);
   color: white;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 700;
+}
+
+.view-area.light {
+  background-color: hsl(0, 0%, 90%);
+  color: hsl(60, 10%, 19%);
+}
+
+.view-area.neon {
+  background-color: hsl(268, 75%, 9%);
+  color: hsl(52, 100%, 62%);
 }
 
 .calc-container {
@@ -19,8 +34,15 @@ body {
   min-width: 300px;
   max-width: 400px;
   height: 500px;
-  top: 60px;
+  top: 70px;
   padding: 10px;
+}
+
+.calc-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 .calc-name {
@@ -29,12 +51,46 @@ body {
   font-weight: 800;
 }
 
+.calc-theme-switcher {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: hsl(224, 36%, 15%);
+}
+
+.calc-theme-switcher.light {
+  background-color: hsl(0, 5%, 81%);
+  color: grey;
+}
+.calc-theme-switcher.neon {
+  background-color: hsl(268, 71%, 12%);
+  color: white;
+}
+
+.calc-theme-switcher:hover {
+  cursor: pointer;
+}
+.calc-theme-switcher:active {
+  transform: scale(0.9, 0.9);
+}
+
 .calc-display {
   position: relative;
   width: 100%;
   height: 20%;
   background-color: hsl(224, 36%, 15%);
   border-radius: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.calc-display.light {
+  color: grey;
+  background-color: hsl(0, 0%, 93%);
+}
+
+.calc-display.neon {
+  background-color: hsl(268, 71%, 12%);
 }
 
 .calc-display > .calc-display-text {
@@ -49,6 +105,24 @@ body {
   bottom: 20px;
   right: 20px;
   font-size: 32px;
+  animation: slide-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 1 backwards;
+  transition: color ease-in 0.7s;
+}
+
+.error {
+  font-size: 24px;
+  color: rgb(196, 60, 60);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-10%);
+    transform: scale(1.4, 1.4);
+  }
+  to {
+    transform: translateX(0%);
+    transform: scale(1, 1);
+  }
 }
 
 .calc-buttons {
@@ -59,9 +133,16 @@ body {
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(10%, 1fr));
   grid-template-rows: repeat(5, 1fr);
-  /*  */
   background-color: hsl(223, 31%, 20%);
   border-radius: 10px;
+}
+
+.calc-buttons.light {
+  background-color: hsl(0, 5%, 81%);
+}
+
+.calc-buttons.neon {
+  background-color: hsl(268, 71%, 12%);
 }
 
 .num {
@@ -71,12 +152,27 @@ body {
   justify-content: center;
   text-align: center;
   border-radius: 5px;
-  box-shadow: 1px 7px rgba(0, 0, 0, 0.2), 0px 6px rgba(10, 10, 10, 0.3);
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2), 0px 6px rgba(10, 10, 10, 0.3);
   background-color: hsl(30, 25%, 89%);
   color: hsl(221, 14%, 31%);
   font-size: 20px;
   cursor: pointer;
-  transition: all 0.3s ease-in;
+  transition: color 0.3s ease-in;
+}
+
+.num.light {
+  background-color: hsl(45, 7%, 89%);
+  box-shadow: 0px 5px hsl(35, 11%, 61%), 0px 6px hsl(35, 11%, 61%);
+}
+
+.num.neon {
+  color: hsl(52, 100%, 62%);
+  background-color: hsl(268, 47%, 21%);
+  box-shadow: 0px 5px hsl(285, 47%, 40%), 0px 6px hsl(285, 47%, 40%);
+}
+
+.num.neon:hover {
+  background-color: hsl(285, 100%, 57%);
 }
 
 .num:hover {
@@ -89,8 +185,27 @@ body {
   background-color: hsl(6, 63%, 50%);
 }
 
+.num.equals.light {
+  background-color: hsl(25, 98%, 40%);
+  box-shadow: 0px 5px hsl(25, 99%, 27%), 0px 6px hsl(25, 99%, 27%);
+}
+
+.num.equals.neon {
+  color: hsl(198, 20%, 13%);
+  background-color: hsl(176, 100%, 44%);
+  box-shadow: 0px 5px hsl(177, 92%, 70%), 0px 6px hsl(177, 92%, 70%);
+}
+
 .num.equals:hover {
   background-color: hsl(6, 75%, 60%);
+}
+
+.num.equals.light:hover {
+  background-color: hsl(25, 98%, 55%);
+}
+
+.num.equals.neon:hover {
+  background-color: hsl(176, 100%, 60%);
 }
 
 .num.del {
@@ -100,8 +215,26 @@ body {
   font-size: 16px;
 }
 
+.num.del.light {
+  background-color: hsl(185, 42%, 37%);
+  box-shadow: 0px 5px hsl(185, 58%, 25%), 0px 6px hsl(185, 58%, 25%);
+}
+
+.num.del.neon {
+  background-color: hsl(281, 89%, 26%);
+  box-shadow: 0px 5px hsl(285, 91%, 52%), 0px 6px hsl(285, 91%, 52%);
+}
+
 .num.del:hover {
   background-color: hsl(225, 40%, 60%);
+}
+
+.num.del.light:hover {
+  background-color: hsl(185, 42%, 45%);
+}
+
+.num.del.neon:hover {
+  background-color: hsl(281, 89%, 45%);
 }
 
 .num.reset {
@@ -110,9 +243,26 @@ body {
   color: white;
   background-color: hsl(225, 21%, 49%);
   text-transform: uppercase;
-  transition: all 0.3s ease-in;
+}
+
+.num.reset.light {
+  background-color: hsl(185, 42%, 37%);
+  box-shadow: 0px 5px hsl(185, 58%, 25%), 0px 6px hsl(185, 58%, 25%);
+}
+
+.num.reset.neon {
+  background-color: hsl(281, 89%, 26%);
+  box-shadow: 0px 5px hsl(285, 91%, 52%), 0px 6px hsl(285, 91%, 52%);
 }
 
 .num.reset:hover {
   background-color: hsl(225, 40%, 60%);
+}
+
+.num.reset.light:hover {
+  background-color: hsl(185, 42%, 45%);
+}
+
+.num.reset.neon:hover {
+  background-color: hsl(281, 89%, 45%);
 }

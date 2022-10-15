@@ -1,3 +1,4 @@
+// Return strin
 function infix_to_postfix(infix_expression) {
   const tokens = infix_expression.split(" ");
   const operator_stack = [];
@@ -48,8 +49,7 @@ function postfix_calculator(postfix_expression) {
       operation_stack.push(tokens[token]);
     } else if (tokens[token].match("[-/+*]")) {
       if (operation_stack.length < 2) {
-        console.log("Too few operands");
-        return;
+        return "Syntax Error";
       } else {
         const value2 = parseFloat(operation_stack.pop());
         const value1 = parseFloat(operation_stack.pop());
@@ -79,7 +79,7 @@ function postfix_calculator(postfix_expression) {
   if (operation_stack.length === 0) {
     return answer;
   } else {
-    console.log("Too many operands");
+    return "Syntax Error";
   }
 }
 

@@ -13,10 +13,38 @@ import calculateString from "./infix-to-postfix";
 function App() {
   const [currentText, setCurrentText] = React.useState("");
   const [answer, setAnswer] = React.useState("");
+  const [currentTheme, setCurrentTheme] = React.useState("");
+  const [themeCounter, setThemeCounter] = React.useState(0);
+
+  // 0 represent default theme, 1 the light theme and 2 the neon theme;
+
+  React.useEffect(() => {
+    if (themeCounter % 3 === 0) {
+      setCurrentTheme("");
+    } else if (themeCounter % 3 === 1) {
+      setCurrentTheme("light");
+    } else {
+      setCurrentTheme("neon");
+    }
+  }, [themeCounter]);
+
+  function changeTheme() {
+    setThemeCounter((prevCounter) => prevCounter + 1);
+  }
 
   function updateText(text) {
     setCurrentText((prevText) => {
       if (text.toString().match("[-/+*]")) {
+        if (
+          answer &&
+          answer !== "Syntax Error" &&
+          answer !== "Division by zero" &&
+          currentText.length === 0
+        ) {
+          if (text.match("[-/+*]")) {
+            return `${answer} ${text} `;
+          }
+        }
         return prevText + " " + text + " ";
       } else return prevText + text;
     });
@@ -25,13 +53,34 @@ function App() {
   function deleteText() {
     setCurrentText((prevText) => {
       if (prevText[prevText.length - 2] === " ") {
-        return prevText.slice(0, prevText.length - 1);
+        return prevText.slice(0, prevText.length - 2);
       } else return prevText.slice(0, prevText.length - 1);
     });
   }
 
   function evaluateExpression() {
-    setAnswer(calculateString(currentText));
+    const result = calculateString(currentText).toString();
+    if (result.startsWith("0") && result.length > 1) {
+      let trimmedResults = "";
+      let trimmed = false;
+      for (let i = 0; i < result.length; i++) {
+        if (trimmed) {
+          trimmedResults += result[i];
+        } else {
+          if (result[i] === "0") {
+            continue;
+          } else {
+            trimmedResults += result[i];
+            trimmed = true;
+          }
+        }
+      }
+      setAnswer(trimmedResults);
+      setCurrentText("");
+    } else {
+      setAnswer(result);
+      setCurrentText("");
+    }
   }
 
   function reset() {
@@ -40,46 +89,127 @@ function App() {
   }
 
   return (
-    <div className="calc-container">
-      <div className="calc-header">
-        <div className="calc-name">calc</div>
-        <div className="calc-theme-switcher"></div>
-      </div>
-      <div className="calc-display">
-        <div className="calc-display-text">{currentText}</div>
-        <div className="calc-answer">{answer}</div>
-      </div>
-      <div className="calc-buttons">
-        <Button class={"num seven"} value={7} updateText={updateText} />
-        <Button class={"num eight"} value={8} updateText={updateText} />
-        <Button class={"num nine"} value={9} updateText={updateText} />
-        <Button class={"num del"} value={"Del"} updateText={deleteText} />
+    <div className={`view-area ${currentTheme}`}>
+      <div className={`calc-container`}>
+        <div className="calc-header">
+          <div className="calc-name">calc</div>
+          <div className="theme-text">Theme</div>
+          <div
+            className={`calc-theme-switcher ${currentTheme}`}
+            onClick={changeTheme}
+          ></div>
+        </div>
+        <div className={`calc-display ${currentTheme}`}>
+          <div className={`calc-display-text`}>{currentText}</div>
+          {answer && (
+            <div
+              className={
+                (answer === "Syntax Error" || answer === "Division by zero") &&
+                answer !== 0
+                  ? "calc-answer error"
+                  : "calc-answer"
+              }
+            >
+              {answer}
+            </div>
+          )}
+        </div>
+        <div className={`calc-buttons ${currentTheme}`}>
+          <Button
+            class={`num ${currentTheme}`}
+            value={7}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={8}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={9}
+            updateText={updateText}
+          />
+          <Button
+            class={`num del ${currentTheme}`}
+            value={"Del"}
+            updateText={deleteText}
+          />
 
-        <Button class={"num four"} value={4} updateText={updateText} />
-        <Button class={"num five"} value={5} updateText={updateText} />
-        <Button class={"num six"} value={6} updateText={updateText} />
-        <Button class={"num add"} value={"+"} updateText={updateText} />
+          <Button
+            class={`num ${currentTheme}`}
+            value={4}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={5}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={6}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={"+"}
+            updateText={updateText}
+          />
 
-        <Button class={"num one"} value={1} updateText={updateText} />
-        <Button class={"num two"} value={2} updateText={updateText} />
-        <Button class={"num three"} value={3} updateText={updateText} />
-        <Button class={"num subtract"} value={"-"} updateText={updateText} />
+          <Button
+            class={`num ${currentTheme}`}
+            value={1}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={2}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={3}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={"-"}
+            updateText={updateText}
+          />
 
-        <Button
-          class={"num decimal-point"}
-          value={"."}
-          updateText={updateText}
-        />
-        <Button class={"num zero"} value={0} updateText={updateText} />
-        <Button class={"num multiply"} value={"*"} updateText={updateText} />
-        <Button class={"num divide"} value={"/"} updateText={updateText} />
+          <Button
+            class={`num ${currentTheme}`}
+            value={"."}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={0}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={"*"}
+            updateText={updateText}
+          />
+          <Button
+            class={`num ${currentTheme}`}
+            value={"/"}
+            updateText={updateText}
+          />
 
-        <Reset class={"num reset"} value={"Reset"} reset={reset} />
-        <Equal
-          class={"num equals"}
-          value={"="}
-          evaluateExpression={evaluateExpression}
-        />
+          <Reset
+            class={`num reset ${currentTheme}`}
+            value={"Reset"}
+            reset={reset}
+          />
+          <Equal
+            class={`num equals ${currentTheme}`}
+            value={"="}
+            evaluateExpression={evaluateExpression}
+          />
+        </div>
       </div>
     </div>
   );
