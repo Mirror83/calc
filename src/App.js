@@ -16,8 +16,6 @@ function App() {
   const [currentTheme, setCurrentTheme] = React.useState("");
   const [themeCounter, setThemeCounter] = React.useState(0);
 
-  // 0 represent default theme, 1 the light theme and 2 the neon theme;
-
   React.useEffect(() => {
     if (themeCounter % 3 === 0) {
       setCurrentTheme("");
@@ -60,6 +58,8 @@ function App() {
 
   function evaluateExpression() {
     const result = calculateString(currentText).toString();
+    // The statements within the if statement below just trim any unnecessary zeroes
+    // that the user may have entered from the output
     if (result.startsWith("0") && result.length > 1) {
       let trimmedResults = "";
       let trimmed = false;
@@ -93,11 +93,15 @@ function App() {
       <div className={`calc-container`}>
         <div className="calc-header">
           <div className="calc-name">calc</div>
-          <div className="theme-text">Theme</div>
-          <div
-            className={`calc-theme-switcher ${currentTheme}`}
-            onClick={changeTheme}
-          ></div>
+          <div className="calc-theme-container">
+            <div className="calc-theme-text">Theme</div>
+            <div
+              className={`calc-theme-switcher ${currentTheme}`}
+              onClick={changeTheme}
+            >
+              <div className={`calc-theme-toggler ${currentTheme}`}></div>
+            </div>
+          </div>
         </div>
         <div className={`calc-display ${currentTheme}`}>
           <div className={`calc-display-text`}>{currentText}</div>

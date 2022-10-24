@@ -29,14 +29,20 @@ Users should be able to:
 
 ### Status
 
-**Partially completed**
+**Almost Completed**
 
-Theme switching is not implemented, but the calculator is functional.
-The styles need to be a bit more refined
+Theme Switching is fully implemented.
+The mobile design is done.
+Styles are a bit more refined.
+
+Intial theme preferrence not checked.
+Accessibility not fully catered for.
 
 ### Screenshot
 
-![First milestone screenshot](./calculator_screenshot.jpg)
+![Theme 1](./calculator_screenshot.jpg)
+![Theme 2](./calculator_screenshot2.jpg)
+![Theme 3](./calculator_screenshot3.jpg)
 
 ### Links
 
@@ -44,7 +50,7 @@ No links at the moment
 
 ## My process
 
-I decided to use React for the UI. For the mathematical operations, I used a common application of stacks: the postfix expression. Now since JS does not offer a stack out of the box, I used the array that it does offer as a stack in the functions that convert the infix expression entered by the user into a postfix one and the one that does the calculation of the newly created postfix expression. This was accomlished by only allowing content to enter and leave the array from its end.
+I decided to use React for the UI. For the mathematical operations, I used a common application of stacks: the postfix expression. Now since JS does not offer a stack out of the box, I used the array that it does offer as a stack in the functions that convert the infix expression entered by the user into a postfix one and the one that does the calculation of the newly created postfix expression. This was accomlished by only allowing content to enter and leave the array from its end. The calculator can observe the order of precedence for the supproted operators.
 
 This solution made it much easier for the user to enter slightly more complex calculations, which may involve multiple operators and operands.
 
