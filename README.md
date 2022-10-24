@@ -40,9 +40,15 @@ Accessibility not fully catered for.
 
 ### Screenshot
 
-![Theme 1](./calculator_screenshot.jpg)
-![Theme 2](./calculator_screenshot2.jpg)
-![Theme 3](./calculator_screenshot3.jpg)
+#### Desktop Design
+
+![Default Theme](./calculator_screenshot.jpg)
+![Light Theme](./calculator_screenshot2.jpg)
+![Neon Theme](./calculator_screenshot3.jpg)
+
+#### Mobile design
+
+![Mobile Design](./mobile_screenshot.png)
 
 ### Links
 
