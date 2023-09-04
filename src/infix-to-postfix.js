@@ -13,7 +13,7 @@ function infix_to_postfix(infix_expression) {
     // If a token is an operand, push it to the output list.
     // If it is an operator, first pop any operators that may have higher precedence
     // from the operator stack and then push it to the operator stack
-    if (tokens[i].match("[A-Za-z0-9]")) {
+    if (tokens[i].match("[0-9]")) {
       output_list.push(tokens[i]);
     } else if (tokens[i].match("[-/+*]")) {
       while (
