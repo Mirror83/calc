@@ -89,7 +89,8 @@ function App() {
   }
 
   return (
-    <div className={`view-area ${currentTheme}`}>
+    <main className={`view-area ${currentTheme}`}>
+      <h1>Calculator</h1>
       <div className={`calc-container`}>
         <div className="calc-header">
           <div className="calc-name">calc</div>
@@ -215,7 +216,7 @@ function App() {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
