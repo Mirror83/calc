@@ -90,7 +90,7 @@ function App() {
 
   return (
     <main className={`view-area ${currentTheme}`}>
-      <h1>Calculator</h1>
+      <h1 className="sr-only">Calculator</h1>
       <div className={`calc-container`}>
         <div className="calc-header">
           <div className="calc-name">calc</div>
